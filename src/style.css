@@ -2,7 +2,7 @@ body {
   font-family: "Roboto", sans-serif;
 }
 .weather-app {
-  background: hsl(0, 0%, 96%);
+  background: white;
   max-width: 600px;
   margin: 45px auto;
   box-shadow: 0 30px 50px rgba(65, 50, 100, 0.08);
@@ -40,7 +40,7 @@ main {
   color: rgba(39, 33, 66, 0.4);
 }
 .weather-app strong {
-  color: red;
+  color: #f65282;
 }
 .weather-app-temperature-container {
   display: flex;
@@ -77,10 +77,27 @@ main {
   font-size: 15px;
 }
 .forecast_date {
-  border-radius: 6px;
-  border: none;
-  background: blue;
-  color: #f9f7fe;
-  padding: 15px 30px;
-  font-size: 15px;
+  text-align: center;
+  font-size: 16px;
+  color: rgba(39, 33, 66, 0.4);
+  line-height: 20px;
+  margin-top: 10px;
+}
+.forecast_icon {
+  font-size: 38px;
+  text-align: center;
+}
+.forecast_temperatures {
+  display: flex;
+  justify-content: center;
+  color: #f65282;
+  margin-top: 10px;
+}
+.forecast_temperature {
+  padding: 0 10px;
+}
+.forecast_wrapper {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
 }

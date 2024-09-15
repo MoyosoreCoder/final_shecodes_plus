@@ -10,7 +10,8 @@ function displayWeather(response) {
   let iconElement = document.querySelector("#icon");
 
   iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`;
-  console.log(response.data);
+  // console.log(response.data);
+
   formatDateValue(date);
   windElement.innerHTML = `${response.data.wind.speed}km/h`;
   humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
@@ -20,14 +21,45 @@ function displayWeather(response) {
   descriptionElement.innerHTML = description;
   cityElement.innerHTML = response.data.city;
   temperatureElement.innerHTML = Math.round(currentTemp);
+  getForecast(response.data.city);
 }
-function formatDateValue(date) {}
-function searchCity(city) {
-  key = "f7b738a0b07436t36c3d2483d34ob9da";
+function getForecast(city) {
+  let apiKey = "f7b738a0b07436t36c3d2483d34ob9da";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  //console.log(apiUrl);
 
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${key}`;
+  axios(apiUrl).then(displayForecast);
+}
+function displayForecast(response) {
+  console.log(response.data);
+  let days = ["Tues", "Wed", "Thurs", "Fri", "Sat"];
+  let forecastHtml = "";
+
+  days.forEach(function (day) {
+    forecastHtml =
+      forecastHtml +
+      ` <div class="forecast_day">
+            <div class="forecast_date">${day}</div>
+            <div class="forecast_icon">⛅</div>
+            <div class="forecast_temperatures">
+              <div class="forecast_temperature">
+                <strong>15°</strong>
+              </div>
+              <div class="forecast_temperature">9°</div>
+            </div>
+          </div>`;
+  });
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = forecastHtml;
+}
+function searchCity(city) {
+  apiKey = "f7b738a0b07436t36c3d2483d34ob9da";
+
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+
   axios.get(apiUrl).then(displayWeather);
 }
+
 function formatDateValue(date) {
   let minutes = date.getMinutes();
   let hours = date.getHours();
@@ -56,3 +88,5 @@ function handleClick(event) {
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleClick);
 searchCity("Paris");
+//getForecast("Paris");
+//displayForecast();

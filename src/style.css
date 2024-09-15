@@ -96,7 +96,7 @@ main {
 .forecast_temperature {
   padding: 0 10px;
 }
-.forecast_wrapper {
+.weather_forecast {
   display: flex;
   justify-content: space-around;
   margin-top: 30px;
